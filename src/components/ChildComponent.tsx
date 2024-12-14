@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 type PropTypes = {
   name: string;
   counter: number;
 };
-export const ChildComponent = ({ name, counter }) => {
+export const ChildComponent: React.FC<PropTypes> = ({ name, counter }) => {
   return (
     <div>
       <h1>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const SiblingComponent = () => {
+export const SiblingComponent: React.FC = () => {
   const [text, setText] = useState('Нажми на кнопку и увидишь магию)');
   const handleClick = () => setText('REDEV');
   return (

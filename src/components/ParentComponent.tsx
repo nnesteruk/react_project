@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ChildComponent } from './ChildComponent';
 import { SiblingComponent } from './SiblingComponent';
 
-export const ParentComponent = () => {
+export const ParentComponent: React.FC = () => {
   const [counter, setCounter] = useState(0);
   const incrementCounter = () => setCounter((counter) => counter + 1);
   const handleClickReset = () => setCounter(0);
