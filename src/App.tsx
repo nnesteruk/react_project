@@ -16,7 +16,7 @@ function App() {
   };
 
   const enterClick = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && value.trim() !== '') {
       setArr((prevArr) => [...prevArr, value]);
       setNewValue('');
     }

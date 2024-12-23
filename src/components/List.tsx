@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 export const List = ({ arr }) => {
   const [tasks, setTasks] = useState([...arr]);
   const [editTask, setEditTask] = useState(null);
   const [newValue, setNewValue] = useState('');
+
+  useEffect(() => {
+    setTasks([...arr]);
+  }, [arr]);
 
   const startEditTask = (index) => {
     setEditTask(index);
