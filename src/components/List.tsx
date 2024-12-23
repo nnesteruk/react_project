@@ -1,30 +1,50 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-
 export const List = ({ arr }) => {
-  const [edit, setEdit] = useState(null);
-  const handleChange = (event) => console.log(event.target.value);
-  const handleClick = () => {
-    setEdit(!edit);
-    console.log(edit);
+  const [tasks, setTasks] = useState([...arr]);
+  const [editTask, setEditTask] = useState(null);
+  const [newValue, setNewValue] = useState('');
+
+  const startEditTask = (index) => {
+    setEditTask(index);
+    setNewValue(tasks[index]);
   };
-  if (edit) {
-    return (
-      <>
-        <input onChange={handleChange} />
-      </>
-    );
-  }
+
+  const changeHandleClick = (index) => {
+    const newTasks = [...tasks];
+    newTasks[index] = newValue;
+    setTasks(newTasks);
+    setEditTask(null);
+    setNewValue('');
+  };
+  const handleChange = (event) => {
+    setNewValue(() => event.target.value);
+  };
+
+  const cancelHandleClick = () => {
+    setNewValue('');
+    setEditTask(null);
+  };
+
   return (
     <>
-      {arr.map((item: string) => (
-        <React.Fragment key={uuidv4()}>
-          <div>
-            <li>{item}</li>
-          </div>
-          <button onClick={() => handleClick()}>Изменить</button>
-        </React.Fragment>
-      ))}
+      <div className="task">
+        {[...tasks].map((item: string, index) => (
+          <li key={index}>
+            {editTask === index ? (
+              <>
+                <input value={newValue} onChange={(e) => handleChange(e)} />
+                <button onClick={() => changeHandleClick(index)}>Изменить</button>
+                <button onClick={() => cancelHandleClick()}>Отмена</button>
+              </>
+            ) : (
+              <>
+                {item}
+                <button onClick={() => startEditTask(index)}>Изменить</button>
+              </>
+            )}
+          </li>
+        ))}
+      </div>
     </>
   );
 };
